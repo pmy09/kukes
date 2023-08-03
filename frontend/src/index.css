@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+body {
+  background: #eadbed;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.Panels {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}
+.leftSide {
+  background-color: white;
+  width: 60%;
+  height: 103%;
+  margin-left: -2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 150px;
+}
+.leader-text {
+  font-size: 3rem;
+  width: 250px;
+  /* max-width: 6rem; */
+}
+.subleader-text {
+  max-width: 320px;
+}
+.rightSide {
+  background-color: #eadbed;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-left: 300px;
+  padding-right: 100px;
+}
+.circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+.decorator-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -40% -50%;
+}
+.line1 {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.text {
+  display: flex;
+  align-items: last baseline;
+  width: 115px;
+}
+.logbutton {
+  background-color: #d1b75a; /* Green */
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 14px;
+  margin-left: 0;
+}
+.signbutton {
+  background-color: #d1b75a; /* Green */
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
