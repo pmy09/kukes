@@ -12,30 +12,32 @@ const signToken = id => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-
-  if (!req.body.name || !req.body.email || !req.body.password) return res.json({
-    message: "Missing fields"
-  });
-  if (req.body.password !== req.body.passwordConfirm) return res.status(400).json({ message: "Password mismatch" })
+console.log("hello", req.body)
+  if (!req.body.email || !req.body.password) {
+    console.log("yo")
+    return "Missing fields";}
+  // if (req.body.password !== req.body.passwordConfirm) return res.status(400).json({ message: "Password mismatch" })
   const newUser = await User.create({
-    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    role: req.body.role
+    role: "user"
   });
+  console.log("newUser", newUser)
   newUser.password = undefined;
   const token = signToken(newUser._id)
 
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user: newUser
-    }
-  })
+  return newUser
+
+  // return res.status(201).send({
+  //   status: 'success',
+  //   token,
+  //   data: {
+  //     user: newUser
+  //   }
+  // })
 
 })
+
 exports.login = catchAsync(async (req, res, next) => {
 
   const { email, password } = req.body

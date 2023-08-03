@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-
+const cors = require('cors');
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 const resRouter = require('./routes/resRoutes');
@@ -17,6 +17,15 @@ if (process.env.NODE_ENV === 'development')
 {
     app.use(morgan('dev'))
 }
+
+app.use(cors());
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use((req, res, next) => {
     req.requestedTime = new Date().toISOString();

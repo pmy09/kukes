@@ -10,17 +10,18 @@ const filterObj = (obj, ...allowedFields) => {
     return newObj;
   };
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
+exports.getAllUsers = async (req, res, next) => {
             const users = await User.find({})
+            console.log("🚀 ~ file: userController.js:15 ~ exports.getAllUsers= ~ users:", users)
     
-            res.status(200).json({
+            return res.status(200).json({
                 status: 'success',
                 results: users.length,
                 data: {
                     users
                 }
             })
-        })
+        }
         
  exports.updateMe = catchAsync(async (req, res, next) => {
             // 1) Create error if user POSTs password data
