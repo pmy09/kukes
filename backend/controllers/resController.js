@@ -5,7 +5,7 @@ const AppError = require('./../utils/appError')
 const Food = require('./../model/foodModel')
 const User = require('./../model/userModel')
 
-exports.getAllRestaurants = catchAsync(async (req, res) => {
+exports.getAllRestaurants = catchAsync(async (req, res, next) => {
    
     let restaurants = await Restaurant.find({}).populate("userId")
     console.log(restaurants)
@@ -29,9 +29,10 @@ exports.createRestaurant = catchAsync(async (req, res, next) => {
     const userId = req.currentUserId
     const user = await User.findOne({ _id: userId })
     
-    if (!user) return res.json({
-        message: 'User does not exist'
-    })
+    if (!user)
+    {
+        next(new AppError('User not found!'))
+    }
 
     if (user && user.role === 'owner')
     {
@@ -50,9 +51,11 @@ exports.createRestaurant = catchAsync(async (req, res, next) => {
         })
     }
 })
-exports.getRestaurant = catchAsync(async (req, res) => {
+exports.getRestaurant = catchAsync(async (req, res, next) => {
 
-
+    if (!restaurant) {
+        return next(new AppError('no restaurant found with that Id', 404))
+    }
         const restaurant = await Restaurant.findById(req.params.id);
 
         res.status(200).json({
@@ -64,9 +67,12 @@ exports.getRestaurant = catchAsync(async (req, res) => {
 
 })
     
-exports.updateRestaurant = catchAsync(async (req, res) => {
+exports.updateRestaurant = catchAsync(async (req, res, next) => {
 
         //const { restaurantId } = req.body
+        if (!restaurant) {
+            return next(new AppError('no restaurant found with that Id', 404))
+        }
 
         const restaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, {new: true})
 
@@ -78,7 +84,10 @@ exports.updateRestaurant = catchAsync(async (req, res) => {
         })
     
 })
-exports.deleteRestaurant = catchAsync(async (req, res) => {
+exports.deleteRestaurant = catchAsync(async (req, res, next) => {
+    if (!restaurant) {
+        return next(new AppError('no restaurant found with that Id', 404))
+    }
     
         const restaurant = await Restaurant.findByIdAndDelete(req.params.id)
 

@@ -6,8 +6,8 @@ const Restaurant = require('../model/resModel');
 
 
 
-exports.getAllFoodsByRestaurant = async (req, res) => {
-    try{
+exports.getAllFoodsByRestaurant = catchAsync(async (req, res, next) => {
+    
     const restaurantId = req.params.restaurantId;
 
     console.log(req.params.restaurantId)
@@ -19,18 +19,10 @@ exports.getAllFoodsByRestaurant = async (req, res) => {
                 foods
             }
     })
-    } catch (err)
-    {
-        res.status(400).json({
-            status: 'Fail',
-            message: err
-        })
-    }
-}
-exports.getAllFoods = async (req, res) => {
-    try{
+   
+})
+exports.getAllFoods =catchAsync (async (req, res, next) => {
     
-
     
         const foods = await Food.find({});
         console.log(foods)
@@ -41,16 +33,10 @@ exports.getAllFoods = async (req, res) => {
                 foods
             }
     })
-    } catch (err)
-    {
-        console.log(err)
-        res.status(400).json({
-            status: 'Fail',
-            message: err
-        })
-    }
-}
-exports.createFood = catchAsync(async (req, res) => {
+    
+})
+
+exports.createFood = catchAsync(async (req, res, next) => {
     const restaurantId = req.params.restaurantId
     const restaurant = await Restaurant.findOne({_id: restaurantId}) 
     console.log(restaurant)
@@ -69,9 +55,8 @@ exports.createFood = catchAsync(async (req, res) => {
     
 })
 
-exports.getFood = async (req, res) => {
-    try
-    {
+exports.getFood =catchAsync( async (req, res, next) => {
+   
         const foodId = req.params.restaurantId
 
         const food = await food.findOne(foodId)
@@ -83,17 +68,10 @@ exports.getFood = async (req, res) => {
             }
         })
 
-    } catch (err)
-    {
-        res.status(400).json({
-            status: 'Fail',
-            message: 'Food not found'
-        })
-    }
-}
-exports.updateFood = async (req, res) => {
-    try
-    {
+    } )
+
+exports.updateFood = catchAsync(async (req, res, next) => {
+    
         const { foodId } = req.body
 
         const food = await Food.updateOne({ _id: foodId}, req.body, {new: true})
@@ -104,16 +82,10 @@ exports.updateFood = async (req, res) => {
                 food
             }
         })
-    } catch (err)
-    {
-        res.status(200).json({
-            status: 'fail',
-            message: err
-        })
-    }
-}
-exports.deleteFood = async (req, res) => {
-    try{
+   
+})
+exports.deleteFood = catchAsync(async (req, res, next) => {
+
     const { foodId } = req.body
     
     const food = await Food.deleteOne({ _id: foodId }, req.body)    
@@ -122,11 +94,5 @@ exports.deleteFood = async (req, res) => {
         status: 'Success',
         data: null
     })
-    } catch (err)
-    {
-        res.status(404).json({
-        status: 'fail',
-        message: err
-        })
-    }
-}
+    
+})
