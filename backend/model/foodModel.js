@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Restaurant = require('./../model/resModel')
 const slugify = require('slugify');
 
 const foodSchema = new mongoose.Schema({

@@ -1,6 +1,6 @@
 const express = require('express');
 const foodController = require('../controllers/foodController')
-const Restaurant = require('./../controllers/resController')
+const resController = require('./../controllers/resController')
 
 //const mongoose = require('mongoose');
 

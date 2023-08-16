@@ -39,9 +39,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
-
+node_modules
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -103,7 +102,7 @@ dist
 # vuepress v2.x temp and cache directory
 .temp
 .cache
-config.env
+
 
 # Docusaurus cache and generated files
 .docusaurus

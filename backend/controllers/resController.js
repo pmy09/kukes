@@ -8,13 +8,18 @@ const User = require('./../model/userModel')
 exports.getAllRestaurants = catchAsync(async (req, res, next) => {
    
     let restaurants = await Restaurant.find({}).populate("userId")
-    console.log(restaurants)
-      restaurants = restaurants.map(restaurant => ({
+console.log(restaurants)
+
+    restaurants = restaurants.map(restaurant => {
+      console.log(restaurant)
+          
+       return  {
         ...restaurant.toObject(),
         createdBy: restaurant.userId.name,
           userId: undefined,
-        __v: undefined
-      }));
+           __v: undefined
+       }
+      });
 
         res.status(200).json({
             status: 'success',
@@ -28,7 +33,7 @@ exports.getAllRestaurants = catchAsync(async (req, res, next) => {
 exports.createRestaurant = catchAsync(async (req, res, next) => {
     const userId = req.currentUserId
     const user = await User.findOne({ _id: userId })
-    
+    console.log(userId, req.body)
     if (!user)
     {
         next(new AppError('User not found!'))
@@ -37,7 +42,7 @@ exports.createRestaurant = catchAsync(async (req, res, next) => {
     if (user && user.role === 'owner')
     {
     
-        const newRestaurant = await Restaurant.create({ userId: req.currentUserId, ...req.body })
+        const newRestaurant = await Restaurant.create({ userId, ...req.body })
         res.status(201).json({
             status: 'success',
             data: {

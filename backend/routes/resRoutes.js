@@ -8,7 +8,7 @@ const router = express.Router();
 router
     .route('/')
     .get(authController.protect, resController.getAllRestaurants)
-    .post(authController.protect, resController.createRestaurant)
+    .post(authController.protect,resController.createRestaurant)
 
 router
     .route('/:id')
